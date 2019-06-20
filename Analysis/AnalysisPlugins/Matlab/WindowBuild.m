@@ -58,6 +58,12 @@ if nSamplesNeeded > nWindow; nSamplesNeeded = nWindow; end
 % determine the timestamp that we need
 timeStampNeeded = (nWindow/2-nSamplesNeeded)*dt(1)+AnalysisTime;
 
+% DEBUG display the timestamp
+tN = datetime(timeStampNeeded, 'ConvertFrom', 'epochtime', 'Epoch', '1904-01-01'); tN.Format='dd-MMM-uuuu HH:mm:ss.SSS';
+msg = sprintf('tN: %s ',char(tN));
+disp (msg);
+% DEBUG
+
 % find the index of the first needed sample of Y
 %   This assumes that t0(1) is the time of the first sample of Y
 nY = length(Y);
@@ -81,7 +87,7 @@ if iY < 0
 else 
     if iY >= nY
         % The needed sample is not in Y.  Return and continue with the next Y
-        TimeStamp = 0;
+        TimeStamp = WindowTime;
         WindowOut = WindowIn;
         return 
     end 
@@ -90,12 +96,14 @@ end
 % Delete the unneeded samples from Y and adjust t0(1)
 Y = Y(:,iY:end);
 nY = length(Y);
-t0(1) = timeStampNeeded;
+t0(1:end) = timeStampNeeded;
 
 
-
+% determine how many samples to trim from the window
+[~,nWindowIn] = size(WindowIn);
+nKeep = nWindow - nWindowIn;
 % trim the samples being replaced out of the Window
-WindowIn = WindowIn(:,nSamplesNeeded+1:end);
+WindowIn = WindowIn(:,nSamplesNeeded-nKeep+1:end);
 
 % if there are enough samples in Y, then use them, if not, use what is
 % there and continue to the next Y.
@@ -103,7 +111,7 @@ if nSamplesNeeded <= nY
     WindowOut = horzcat(WindowIn,Y(:,1:nSamplesNeeded));
     TimeStamp = AnalysisTime;    
     RemainingSamples = Y(:,nSamplesNeeded+1:end);
-    RemainingTime = t0(1) + nSamplesNeeded*dt(1);
+    RemainingTime = t0 + nSamplesNeeded*dt(1);
     Valid = 't';
     Continue = 'f';
     return
@@ -111,7 +119,7 @@ else
     WindowOut = horzcat(WindowIn,Y);
     TimeStamp = AnalysisTime - (nSamplesNeeded - nY)*dt(1);
     RemainingSamples = [];
-    RemainingTime = 0;
+    RemainingTime = [];
     Valid = 'f';
     Continue = 't';   
 end    
