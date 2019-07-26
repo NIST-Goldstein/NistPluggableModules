@@ -13,12 +13,12 @@
 		<Item Name="HilTest.lvclass" Type="Friended Library" URL="../../../../HILCalibration/TestClass/HilTest.lvclass"/>
 		<Item Name="TestBase.lvclass" Type="Friended Library" URL="../../../Framework/TestBaseClass/TestBase.lvclass"/>
 		<Item Name="Test.lvclass" Type="Friended Library" URL="../../../TestClass/Test.lvclass"/>
-		<Item Name="Main.vi" Type="Friended VI" URL="../../../../Main.vi"/>
+		<Item Name="main.vi" Type="Friended VI" URL="../../../../SgInterop/main.vi"/>
 		<Item Name="RegisterEventArray.vi" Type="Friended VI" URL="../../../../Framework/RegisterEventArray.vi"/>
 		<Item Name="Bus.lvclass:BusEvents.vi" Type="Friended VI" URL="../../../BusClass/Public/BusEvents.vi"/>
 	</Item>
 	<Item Name="Private" Type="Folder">
-		<Item Name="Stop.vi" Type="VI" URL="../Private/Stop.vi"/>
+		<Item Name="State.vi" Type="VI" URL="../Private/State.vi"/>
 	</Item>
 	<Item Name="Protected" Type="Folder">
 		<Property Name="NI.LibItem.Scope" Type="Int">4</Property>
@@ -27,6 +27,7 @@
 			<Item Name="DestroyBroadcastEvents.vi" Type="VI" URL="../Protected/Broadcasts/DestroyBroadcastEvents.vi"/>
 			<Item Name="DidInit.vi" Type="VI" URL="../Protected/Broadcasts/DidInit.vi"/>
 			<Item Name="DidStop.vi" Type="VI" URL="../Protected/Broadcasts/DidStop.vi"/>
+			<Item Name="Info.vi" Type="VI" URL="../Protected/Broadcasts/Info.vi"/>
 			<Item Name="LockStatus.vi" Type="VI" URL="../Protected/Broadcasts/LockStatus.vi"/>
 			<Item Name="ObtainBroadcastEvents.vi" Type="VI" URL="../Protected/Broadcasts/ObtainBroadcastEvents.vi"/>
 			<Item Name="ReportError.vi" Type="VI" URL="../Protected/Broadcasts/ReportError.vi"/>
